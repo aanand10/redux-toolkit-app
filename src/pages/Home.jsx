@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import Products from "../components/Products";
-import Amazon from "../components/amazon";
+import Amazon from "../components/Amazon";
 // import axios from "axios";
 
 // const apiKey = "AKIAI3L5F5IIMRWCIXJQ"; // Replace with your actual API key
