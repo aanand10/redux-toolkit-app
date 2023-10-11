@@ -56,8 +56,40 @@ export default productSlice.reducer;
 
 // async thumb : this was made for the better error handle according to the promise resolvement
 //it generates 3 actions : pending , fulfilled , rejected
-export const fetchProducts = createAsyncThunk("products/fetch", async () => {
-  const res = await fetch("https://fakestoreapi.com/products");
-  const data = await res.json();
-  return data;
-});
+// export const fetchProducts = createAsyncThunk("products/fetch", async () => {
+//   const res = await fetch("https://fakestoreapi.com/products");
+//   const data = await res.json();
+//   return data;
+// });
+const apiUrl = "http://3.7.252.58:4001/product/getAllProduct";
+
+// Create a Redux thunk action for fetching data
+export const fetchProducts = createAsyncThunk(
+  "products/fetchData",
+  async () => {
+    try {
+      const response = await fetch(apiUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Cookie:
+            "connect.sid=s%253AC9UlQ9M1W1aslddIqBNrrk68Yx4GleaF.OyLqPkC%252FpbJKf070EG6KIJoS70bHaP5GOYXB...",
+        },
+        body: JSON.stringify({
+          limit: 100,
+          page: 0,
+          search: "",
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      throw error; // This will be captured as a rejected action
+    }
+  }
+);

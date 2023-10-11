@@ -35,7 +35,7 @@ const Products = () => {
       {products?.map((product) => (
         <div
           className="bg-white border  rounded-lg flex items-center justify-between flex-col p-4"
-          key={product.id}
+          key={product._id}
         >
           <img src={product.image} alt="" srcset="" />
           <h4 className="w-[70%] text-center"> {product.title}</h4>
